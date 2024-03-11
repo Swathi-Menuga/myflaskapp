@@ -1,0 +1,54 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+h1 {
+    color: #008080; /* Teal color */
+}
+
+/* Add a box around paragraphs */
+p {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: flex;
+     /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+a {
+    color: #0066cc; /* Blue color */
+    text-decoration: none;
+    display: block; /* Set links to block level for vertical arrangement */
+    margin-bottom: 10px; /* Add margin to create space between links */
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Add a box around links */
+a {
+    border: 1px solid #0066cc; /* Border color for links */
+    padding: 5px 10px;
+    border-radius: 5px; /* Rounded corners for links */
+}
+
+a:hover {
+    background-color: #0066cc; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+.success {
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border-radius: 4px;
+    box-sizing: border-box;
+}

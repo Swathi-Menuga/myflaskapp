@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="static/style.css">
+
+
+</head>
+<body>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class="success">{{ message }}</div>
+                {% elif category == 'error' %}
+                    <div class="error">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class="success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+   
+    <form method="POST" action="{{ url_for('register') }}">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <h1>Create Your Account</h1>
+        <label for="first_name">First Name:</label>
+        <div>
+            {{ form.first_name() }}
+            <br>
+            {% for error in form.first_name.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+
+        <label for="last_name">Last Name:</label>
+        <div>
+            {{ form.last_name() }}
+            <br>
+            {% for error in form.last_name.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+
+        <label for="email">Email:</label>
+        <div>
+            {{ form.email() }}
+            <br>
+            {% for error in form.email.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+<div class="password-container">
+        <label for="password">Password:</label>
+        <div>
+            {{ form.password() }}
+            <span class="show-password-btn" onclick="togglePasswordVisibility1()">Show</span>
+    <br>
+        
+            {% for error in form.password.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+    </div>   
+     
+    <div class="confirm-password-container">
+        <label for="confirm_password">Confirm Password:</label>
+        <div>
+            {{ form.confirm_password() }}
+            <span class="show-confirm-password-btn" onclick="toggleConfirmPasswordVisibility()">Show</span>
+            <br>
+            {% for error in form.confirm_password.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+    </div>
+
+        <input type="submit" value="create account">
+        <a href="{{ url_for('index') }}">Go Back To Home</a> 
+       
+        
+    </form>
+    <script>
+        function togglePasswordVisibility1() {
+            var passwordField = document.getElementById("password");
+            var showPasswordBtn = document.querySelector(".show-password-btn");
+    
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                showPasswordBtn.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                showPasswordBtn.textContent = "Show";
+            }
+        }
+        function toggleConfirmPasswordVisibility() {
+        var confirmPasswordField = document.getElementById("confirm_password");
+        var showConfirmPasswordBtn = document.querySelector(".show-confirm-password-btn");
+
+        if (confirmPasswordField.type === "password") {
+            confirmPasswordField.type = "text";
+            showConfirmPasswordBtn.textContent = "Hide";
+        } else {
+            confirmPasswordField.type = "password";
+            showConfirmPasswordBtn.textContent = "Show";
+        }
+    }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body>
+    <div class="container">
+    <h1>Welcome to the Home Page!</h1>
+  
+
+    <form method="post" action="{{ url_for('index') }}">
+        {{ form.hidden_tag() }}
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+<div class="password-container">    
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span class="show-password-btn" onclick="togglePasswordVisibility1()">Show</span>
+        <br>
+</div>        
+        <button type="submit" class="button">Login</button>
+        
+    </form>
+<br>
+    
+
+        <form action="/register" method="get">
+            {{ form.csrf_token }}
+            <p>Don't have an account? <button type="submit" class="button">Create Account</button></p>
+            
+        </form>
+            
+        
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+
+</div>
+<script>
+    
+    function togglePasswordVisibility1() {
+        var passwordField = document.getElementById("password");
+        var showPasswordBtn = document.querySelector(".show-password-btn");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            showPasswordBtn.textContent = "Hide";
+        } else {
+            passwordField.type = "password";
+            showPasswordBtn.textContent = "Show";
+        }
+    }
+    </script>
+</body>
+</html>
