@@ -17,7 +17,7 @@ def client(app_context):
     with app.test_client() as client:
         with app.app_context():
             db.create_all()  # Create all tables in the test database
-            # Add sample user data to the test database only if it doesn't exist
+            # Adding sample user data to the test database only if it doesn't exist
             existing_user = User.query.filter_by(email='sunny@gmail.com').first()
             if not existing_user:
                 sample_user = User(first_name='menugollu', last_name='sunny', email='sunny@gmail.com', password='Sunny@123')
@@ -66,7 +66,7 @@ def test_update_user(client):
         # Commit the changes to the database
         db.session.commit()
 
-        # Send a request to update the user via the client
+        # Sending a request to update the user via the client
         response = client.post(f'/update_user/{user.id}', data={
             'first_name': 'menuga_updated',
             'last_name': 'sunny_updated',
@@ -74,7 +74,6 @@ def test_update_user(client):
             'password': 'Sunny@123_updated'
         }, follow_redirects=True)
 
-        # Check if the update was successful
         assert b'User updated successfully!' in response.data
 
 # Test delete user functionality
@@ -88,8 +87,6 @@ def test_delete_user(client):
         # Ensure that the user exists in the database
         assert user is not None, "User with email 'sunny@gmail.com' does not exist"
 
-        # Send a request to delete the user via the client
+        # Sending a request to delete the user via the client
         response = client.get(f'/delete_user/{user.id}', follow_redirects=True)
-
-        # Check if the user was successfully deleted
         assert b'User deleted successfully!' in response.data
